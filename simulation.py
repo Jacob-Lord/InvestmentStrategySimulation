@@ -73,10 +73,10 @@ def main():
 
         #condition to buy stock
         if (stock_price < buy_limit and bank_acct_amt > 0):
-            bank_acct_amt, stock_amt = buy_stock(bank_acct_amt, stock_amt) #call buy stock function
+            bank_acct_amt, stock_amt = buy_stock(bank_acct_amt, stock_amt, stock_price) #call buy stock function
         #condition to sell stock for money
         elif (stock_price > sell_limit and stock_amt > 0):
-            bank_acct_amt, stock_amt = sell_stock(bank_acct_amt, stock_amt) #call sell stock function
+            bank_acct_amt, stock_amt = sell_stock(bank_acct_amt, stock_amt, stock_price) #call sell stock function
 
         #if there is money in the savings account, apply interest rate to it and add the amount to the account.
         if (bank_acct_amt > 0): 
