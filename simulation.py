@@ -42,46 +42,47 @@ def simulate_stock_price_change(stock_price, rand_val, change_rate):
 
     return stock_price
 
-def buy_stock(bank_acct_amt, stock_amt):
+def buy_stock(bank_acct_amt, stock_amt, stock_price):
     stock_amt = bank_acct_amt / stock_price #calculate amount of stock that can be purchased and "purchase" it
     bank_acct_amt = 0 #set amount to 0 because we bought stock with it
     return bank_acct_amt, stock_amt
 
-def sell_stock(bank_acct_amt, stock_amt):
+def sell_stock(bank_acct_amt, stock_amt, stock_price):
     bank_acct_amt = stock_amt * stock_price #calculate how much the stock is worth and "sell" it
     stock_amt = 0 #set stock amount to 0 because we sold it
     return bank_acct_amt, stock_amt
 
-random_num_list = [] #declare list to hold randomly generated numbers
-bank_acct_amt = 1000 #initial investment amount
-months = 120 #number of months to simulate; 5 years in this case
-stock_price = 100 #initial stock price
-interest_amt = 0 #amount of interest made from savings 
-interest_rate = 0.005 #interest rate of savings account if money is held in there
-change_rate = 0.05 #rate of change for stock every month if it changes
-buy_limit = 95 #boundary point where we choose to convert our money to stock
-sell_limit = 110 #boundary point where we choose to sell our stock for money
-stock_amt = 0 #amount of stock held by user
+def main():
+    random_num_list = [] #declare list to hold randomly generated numbers
+    bank_acct_amt = 1000 #initial investment amount
+    months = 60 #number of months to simulate; 5 years in this case
+    stock_price = 100 #initial stock price
+    interest_amt = 0 #amount of interest made from savings 
+    interest_rate = 0.005 #interest rate of savings account if money is held in there
+    change_rate = 0.05 #rate of change for stock every month if it changes
+    buy_limit = 95 #boundary point where we choose to convert our money to stock
+    sell_limit = 110 #boundary point where we choose to sell our stock for money
+    stock_amt = 0 #amount of stock held by user
 
-init_rand_nums(random_num_list, months) #initialize random number list with 60 randomly generated numbers to represent 60 months (5 years)
+    init_rand_nums(random_num_list, months) #initialize random number list with 60 randomly generated numbers to represent 60 months (5 years)
 
-for i in range(months):
-    rand_val = random_num_list[i]
+    for i in range(months):
+        rand_val = random_num_list[i]
 
-    stock_price = simulate_stock_price_change(stock_price, rand_val, change_rate)
+        stock_price = simulate_stock_price_change(stock_price, rand_val, change_rate)
 
-    #condition to buy stock
-    if (stock_price < buy_limit and bank_acct_amt > 0):
-        bank_acct_amt, stock_amt = buy_stock(bank_acct_amt, stock_amt) #call buy stock function
-    #condition to sell stock for money
-    elif (stock_price > sell_limit and stock_amt > 0):
-        bank_acct_amt, stock_amt = sell_stock(bank_acct_amt, stock_amt) #call sell stock function
+        #condition to buy stock
+        if (stock_price < buy_limit and bank_acct_amt > 0):
+            bank_acct_amt, stock_amt = buy_stock(bank_acct_amt, stock_amt) #call buy stock function
+        #condition to sell stock for money
+        elif (stock_price > sell_limit and stock_amt > 0):
+            bank_acct_amt, stock_amt = sell_stock(bank_acct_amt, stock_amt) #call sell stock function
 
-    #if there is money in the savings account, apply interest rate to it and add the amount to the account.
-    if (bank_acct_amt > 0): 
-        interest_amt = bank_acct_amt * interest_rate #calculate amount gained from interest
-        bank_acct_amt += interest_amt #add interest amount to savings account
+        #if there is money in the savings account, apply interest rate to it and add the amount to the account.
+        if (bank_acct_amt > 0): 
+            interest_amt = bank_acct_amt * interest_rate #calculate amount gained from interest
+            bank_acct_amt += interest_amt #add interest amount to savings account
 
-    print("bank amt: " + str(bank_acct_amt) + " stock amt: " + str(stock_amt) + " stock price: " + str(stock_price))
+        print("bank amt: " + str(bank_acct_amt) + " stock amt: " + str(stock_amt) + " stock price: " + str(stock_price))
 
-
+main()
