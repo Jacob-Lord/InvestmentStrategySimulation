@@ -1,12 +1,3 @@
----
-
-# Student Info
-
-- **Name** : Jacob Lord
-- **Student ID**: 109632812
-
----
-
 # Read Me
 
 ## Description of the program
@@ -17,11 +8,12 @@ It is assumed that there are no transaction costs to buy or sell stock.
 
 ## Source files
 
-**_main.py_**
+**_simulation.py_**
 
 ## Usage
 
-Can be run on any system with python3 installed. File will be interpreted at run-time.
+Tabulate import must be installed.
+Otherwise can be run on any system with python3 installed. File will be interpreted at run-time.
 
 ## Program Output
 
